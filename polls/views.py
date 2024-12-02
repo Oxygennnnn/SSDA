@@ -91,3 +91,61 @@ def resultsData(request, poll_id):
         votedata.append({i.choice_text: i.get_vote_count})
 
     return JsonResponse(votedata, safe=False)
+
+@login_required()
+def polls_add(request):
+    # if request.user.has_perm('polls.add_poll'):
+        if request.method == 'POST':
+            form = PollAddForm(request.POST,request.FILES)
+            if form.is_valid:
+                poll = form.save(commit=False)
+                poll.owner = request.user
+                poll.save()
+                new_choice1 = Choice(
+                    poll=poll, choice_text=form.cleaned_data['choice1']).save()
+                new_choice2 = Choice(
+                    poll=poll, choice_text=form.cleaned_data['choice2']).save()
+
+                messages.success(
+                    request, "Poll & Choices added successfully.", extra_tags='alert alert-success alert-dismissible fade show')
+
+                return redirect('polls:list')
+        else:
+            form = PollAddForm()
+        context = {
+            'form': form,
+        }
+        return render(request, 'polls/add_poll.html', context)
+    # else:
+    #     return HttpResponse("Sorry but you don't have permission to do that!")
+
+
+@login_required
+def polls_edit(request, poll_id):
+    poll = get_object_or_404(Poll, pk=poll_id)
+    if request.user != poll.owner:
+        return redirect('home')
+
+    if request.method == 'POST':
+        form = EditPollForm(request.POST, request.FILES, instance=poll)
+        if form.is_valid:
+            form.save()
+            messages.success(request, "Poll Updated successfully.",
+                             extra_tags='alert alert-success alert-dismissible fade show')
+            return redirect("polls:list")
+
+    else:
+        form = EditPollForm(instance=poll)
+
+    return render(request, "polls/poll_edit.html", {'form': form, 'poll': poll})
+
+
+@login_required
+def polls_delete(request, poll_id):
+    poll = get_object_or_404(Poll, pk=poll_id)
+    if request.user != poll.owner:
+        return redirect('home')
+    poll.delete()
+    messages.success(request, "Poll Deleted successfully.",
+                     extra_tags='alert alert-success alert-dismissible fade show')
+    return redirect("polls:list")
