@@ -53,10 +53,12 @@ class Poll(models.Model):
                 self.poll_id = self.generate_poll_id()
                 while Poll.objects.filter(poll_id=self.poll_id).exists():
                     self.poll_id = self.generate_poll_id()
+            elif self.poll_id and (not self.poll_id.isdigit() or len(self.poll_id) != 6):
+                self.poll_id = self.generate_poll_id()
             super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.poll_id if self.poll_id else "Poll not saved yet"
+        return self.poll_id
 
 
 class Choice(models.Model):
