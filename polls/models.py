@@ -1,29 +1,15 @@
 from django.db import models
+import random
 import secrets
 from django.utils import timezone
 from django.contrib.auth.models import User
 
 class Poll(models.Model):
-    poll_id = models.TextField()
+    poll_id = models.TextField(unique=True, blank=True)
     text = models.TextField()
     pub_date = models.DateTimeField(default=timezone.now)
     active = models.BooleanField(default=True)
 
-    def generate_poll_id(self):
-        n=6
-        id=''
-        lower_case="qwertyuiopasdfghjklzxcvnm"
-        upper_case='QWERTYUIOPASDFGHKJKLZXCVBNM'
-        numbers='1234567890'
-        special_characters='!_-.,'
-        all=lower_case+upper_case+numbers+special_characters
-
-        for i in range(6):
-            id+=all[random.randint(0,len(all))]
-
-        return id
-    def __str__(self):
-        return self.poll_id
 
     def user_can_vote(self, user):
         user_votes = user.vote_set.all()
@@ -53,6 +39,24 @@ class Poll(models.Model):
                                    self.get_vote_count) * 100
             res.append(d)
         return res
+
+    def generate_poll_id(self):
+        n=6
+        id=''
+        numbers='1234567890'
+        for i in range(6):
+            id += numbers[random.randint(0, len(numbers) - 1)]
+        return id
+
+    def save(self, *args, **kwargs):
+            if not self.poll_id:
+                self.poll_id = self.generate_poll_id()
+                while Poll.objects.filter(poll_id=self.poll_id).exists():
+                    self.poll_id = self.generate_poll_id()
+            super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.poll_id if self.poll_id else "Poll not saved yet"
 
 
 class Choice(models.Model):
