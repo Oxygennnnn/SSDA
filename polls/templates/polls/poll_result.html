@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'css/poll.css' %}">
+{% endblock custom_css %}
 {% block content %}
 <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -58,7 +61,7 @@
     }
    
 
-    var dataURL='/polls/resultsdata/' +{{poll.id}} + '/'
+    var dataURL='/polls/resultsdata/' + '{{ poll.id }}' + '/'
 
     $.ajax({
         method:'GET',

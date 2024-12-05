@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
-
-
+{% load static %}
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'css/poll.css' %}">
+{% endblock custom_css %}
 {% block content %}
 <div class="container">
     <h1>Polls details page</h1>
