@@ -50,5 +50,3 @@ class ChoiceAddForm(forms.ModelForm):
         widgets = {
             'choice_text': forms.TextInput(attrs={'class': 'form-control', })
         }
-
-# Removed EnterQuizForm as it is no longer relevant

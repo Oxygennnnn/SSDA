@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 class Poll(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     poll_id = models.TextField(unique=True, blank=True)
     text = models.TextField()
     pub_date = models.DateTimeField(default=timezone.now)

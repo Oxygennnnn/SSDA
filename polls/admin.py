@@ -13,7 +13,7 @@ class ChoiceInline(admin.TabularInline):
 
 class PollAdmin(admin.ModelAdmin):
     fields = ['text', 'pub_date', 'poll_id','active']
-    list_display = ('text', 'pub_date', 'poll_id', 'active')
+    list_display = ('text', 'pub_date', 'poll_id', 'active', "owner")
     inlines = [ChoiceInline]
 
     def formfield_for_dbfield(self, db_field, request, **kwargs):
