@@ -1,38 +1,48 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock custom_css %}
 
 {% block content %}
-    <div class="container">
-    <div class="row center">
-        <div class="col-md-6 offset-md-3">
-            {% if messages %}
-            <div class="messages">
-                {% for message in messages %}
-                <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <div class="container" style="margin-top: 16vw;">
+        
+        <div class="row center">
+            <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="title" style="padding: 10px 40px; height: 100px; border-radius: 100px; background-color: #5d9bec; color: #000000; margin-top: -100px; ">
+                    <h1 style="font-weight: bold; font-size: 60px;">Login Page</h1>
                 </div>
-                {% endfor %}
+                <div class="form-container" style="width: 30vw;">
+                    {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                        <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" name="username" placeholder="Enter Username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <p>Need an account? <a href="{% url 'accounts:register' %}">Register Here</a></p>
+                    </form>
+                </div>
             </div>
-            {% endif %}
-            
-            <form action="" method="post" >
-            
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" name="username" placeholder="Enter Username">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" name="password" placeholder="Password">
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Login</button>
-                <p>Need an account? <a href="{% url 'accounts:register' %}">Register Here</a></p>
-            </form>
         </div>
-    </div>
+
+        
 </div>
 {% endblock %}
