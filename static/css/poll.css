@@ -1,0 +1,17 @@
+html, body {
+    height:100%;
+    font-weight: bold;
+    padding-top: 22px;
+  }
+
+body {
+    background: linear-gradient(to bottom, #5d9bec, #2d53df);
+  }
+  
+  h1 {
+    font-weight: bold;
+  }
+
+  a {
+    font-weight: bold;
+  }
