@@ -5,7 +5,7 @@
 {% endblock custom_css %}
 
 {% block content %}
-<div class="container">
+<div class="container" style="margin-top: -1vw;">
     <div class="row">
         <div class="col-md-8 offset-sm-2">
             <h1 class="text-center mt-3 mb-3">Welcome to Polls List!</h1>
@@ -34,7 +34,7 @@
                 <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
             </form>
 
-            <ul class="list-group" style="width: 100%;">
+            <ul class="list-group">
                 {% for poll in polls %}
                 <li class="list-group-item">
                     <a href="{% url 'polls:detail' poll.id %}">
