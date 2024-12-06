@@ -16,14 +16,14 @@ from django.http import JsonResponse
 
 @login_required()
 def polls_list(request):
-    all_polls = Poll.objects.all()
+    all_polls = Poll.objects.all().order_by('-pub_date')
 
     search_term = ''
     if 'name' in request.GET:
         all_polls = all_polls.order_by('text')
 
     if 'date' in request.GET:
-        all_polls = all_polls.order_by('pub_date')
+        pass
 
     if 'vote' in request.GET:
         all_polls = all_polls.annotate(Count('vote')).order_by('vote__count')

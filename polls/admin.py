@@ -12,7 +12,7 @@ class ChoiceInline(admin.TabularInline):
     model = Choice
 
 class PollAdmin(admin.ModelAdmin):
-    fields = ['text', 'pub_date', 'poll_id','active']
+    fields = ['owner', 'text', 'pub_date', 'poll_id','active']
     list_display = ('text', 'pub_date', 'poll_id', 'active', "owner")
     inlines = [ChoiceInline]
 
