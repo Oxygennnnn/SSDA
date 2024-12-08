@@ -47,24 +47,28 @@ def index(request):
 
                 # 检查密码是否匹配
                 if password1 != password2:
+                    print('Passwords do not match!')
                     check1 = True
                     messages.error(request, 'Password doesn\'t match!',
                                     extra_tags='alert alert-warning alert-dismissible fade show')
 
                 # 检查邮箱是否已存在
                 if User.objects.filter(email=email).exists():
+                    print('Email already exists!')
                     check2 = True
                     messages.error(request, 'Email already exists!',
                                     extra_tags='alert alert-warning alert-dismissible fade show')
 
                 # 检查用户名是否已存在
                 if User.objects.filter(username=username).exists():
+                    print('Username already exists!')
                     check3 = True
                     messages.error(request, 'Username already exists!',
                                     extra_tags='alert alert-warning alert-dismissible fade show')
 
                 # 如果有错误，返回错误信息
                 if check1 or check2 or check3:
+                    print('Check failed!')
                     messages.error(request, 'Registration failed!',
                                    extra_tags='alert alert-warning alert-dismissible fade show')
                 else:
