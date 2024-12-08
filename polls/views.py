@@ -76,26 +76,6 @@ def list_by_user(request):
     return render(request, 'polls/polls_list.html', context)
 
 @login_required()
-def poll_vote(request, poll_id):
-    poll = get_object_or_404(Poll, pk=poll_id)
-    choice_id = request.POST.get('choice')
-
-    if not poll.user_can_vote(request.user):
-        messages.error(
-            request, "You already voted in this poll", extra_tags='alert alert-warning alert-dismissible fade show')
-        return render(request, "polls/poll_result.html", {'poll': poll})
-
-    if choice_id:
-        choice = Choice.objects.get(id=choice_id)
-        vote = Vote(user=request.user, poll=poll, choice=choice)
-        vote.save()
-        return render(request, "polls/poll_result.html", {'poll': poll})
-    else:
-        messages.error(
-            request, "No choice selected", extra_tags='alert alert-warning alert-dismissible fade show')
-        return redirect("polls:detail", poll_id)
-
-@login_required()
 def resultsData(request, poll_id):
     votedata = []
     poll = get_object_or_404(Poll, pk=poll_id)
@@ -119,6 +99,10 @@ def polls_add(request):
                     poll=poll, choice_text=form.cleaned_data['choice1']).save()
                 new_choice2 = Choice(
                     poll=poll, choice_text=form.cleaned_data['choice2']).save()
+                new_choice3 = Choice(
+                    poll=poll, choice_text=form.cleaned_data['choice3']).save()
+                new_choice4 = Choice(
+                    poll=poll, choice_text=form.cleaned_data['choice4']).save()
 
                 messages.success(
                     request, "Poll & Choices added successfully.", extra_tags='alert alert-success alert-dismissible fade show')
@@ -230,9 +214,9 @@ def poll_detail(request, poll_id):
     poll = get_object_or_404(Poll, id=poll_id)
 
     if not poll.user_can_vote(request.user):
-        messages.error(
-            request, "You already voted this poll!", extra_tags='alert alert-warning alert-dismissible fade show')
-        return redirect("polls:list")
+        # messages.error(
+        #     request, "You already voted this poll!", extra_tags='alert alert-warning alert-dismissible fade show')
+        return render(request, 'polls/poll_result.html', {'poll': poll})
 
 
     if not poll.active:
@@ -249,10 +233,10 @@ def poll_detail(request, poll_id):
 def poll_vote(request, poll_id):
     poll = get_object_or_404(Poll, pk=poll_id)
     choice_id = request.POST.get('choice')
-    if not poll.user_can_vote(request.user):
-        messages.error(
-            request, "You already voted this poll!", extra_tags='alert alert-warning alert-dismissible fade show')
-        return redirect("polls:list")
+    # if not poll.user_can_vote(request.user):
+    #     messages.error(
+    #         request, "You already voted this poll!", extra_tags='alert alert-warning alert-dismissible fade show')
+    #     return redirect("polls:list")
 
     if choice_id:
         choice = Choice.objects.get(id=choice_id)

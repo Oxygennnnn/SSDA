@@ -4,16 +4,16 @@ from .models import Poll, Choice
 
 class PollAddForm(forms.ModelForm):
 
-    choice1 = forms.CharField(max_length=150, min_length=2, label='Choice 1',
+    choice1 = forms.CharField(max_length=150, min_length=1, label='Choice 1',
                               widget=forms.TextInput(attrs={'class': 'form-control'}))
 
-    choice2 = forms.CharField(max_length=150, min_length=2, label='Choice 2',
+    choice2 = forms.CharField(max_length=150, min_length=1, label='Choice 2',
                               widget=forms.TextInput(attrs={'class': 'form-control'}))
 
-    choice3 = forms.CharField(max_length=150, min_length=2, label='Choice 3',
+    choice3 = forms.CharField(max_length=150, min_length=1, label='Choice 3',
                               widget=forms.TextInput(attrs={'class': 'form-control'}))
 
-    choice4 = forms.CharField(max_length=150, min_length=2, label='Choice 4',
+    choice4 = forms.CharField(max_length=150, min_length=1, label='Choice 4',
                               widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
