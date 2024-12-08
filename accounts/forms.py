@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class UserRegistrationForm(forms.Form):
 
-    username=forms.CharField(label='Username',max_length=10,min_length=5,
+    username=forms.CharField(label='Username',max_length=10,min_length=3,
                             widget=forms.TextInput(attrs={'class':'form-control'}))
     email=forms.EmailField(label='Email',max_length=20,min_length=5,
                             widget=forms.EmailInput(attrs={'class':'form-control'}))

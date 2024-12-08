@@ -23,6 +23,6 @@ urlpatterns = [
     path('home/',views.home,name='home'),
     path('polls/',include('polls.urls',namespace='polls')),
     path('accounts/',include('accounts.urls',namespace='accounts')),
-    re_path('^$', RedirectView.as_view(url='/home/', permanent=False)),
-    path('', views.home, name='root')
+    re_path('^$', RedirectView.as_view(url='/accounts/index/', permanent=False)),
+    # path('', views.home, name='root')
 ]
