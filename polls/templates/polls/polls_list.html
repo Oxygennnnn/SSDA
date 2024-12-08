@@ -21,17 +21,18 @@
             </div>
             {% endif %} -->
 
-            <a class="btn btn-{% if 'name' in request.GET %}warning{% else %}primary{% endif %} mb-3" href="?name=True" role="button"><i class="fas fa-sort-alpha-down"></i> Name</a>
+            <!-- <a class="btn btn-{% if 'name' in request.GET %}warning{% else %}primary{% endif %} mb-3" href="?name=True" role="button"><i class="fas fa-sort-alpha-down"></i> Name</a>
             <a class="btn btn-{% if 'date' in request.GET %}warning{% else %}primary{% endif %} mb-3" href="?date=True" role="button"><i class="far fa-clock"></i> Date</a>
-            <a class="btn btn-{% if 'vote' in request.GET %}warning{% else %}primary{% endif %} mb-3" href="?vote=True" role="button"><i class="fas fa-poll"></i> Vote</a>
+            <a class="btn btn-{% if 'vote' in request.GET %}warning{% else %}primary{% endif %} mb-3" href="?vote=True" role="button"><i class="fas fa-poll"></i> Vote</a> -->
 
-            <a class="btn btn-primary mb-3 float-right" href="{% url 'polls:add' %}" role="button">Add <i class="fas fa-plus"></i></a>
+            
 
             <form class="form-inline">
                 <div class="form-group mr-sm-2 mb-2">
                     <input type="search" class="form-control" name="search" placeholder="Search" value="{{ search_term }}">
                 </div>
                 <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
+                <a class="btn btn-primary mb-3 float-right" href="{% url 'polls:add' %}" role="button" style="margin-left: 10px; margin-bottom: -2px;">Add <i class="fas fa-plus"></i></a>
             </form>
 
             <ul class="list-group">
