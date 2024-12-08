@@ -75,6 +75,7 @@ def index(request):
                     print('log in')
                     # 创建用户并自动登录
                     user = User.objects.create_user(username=username, password=password1, email=email)
+                    user.save()
                     # 使用 authenticate 和 login 来自动登录
                     user = authenticate(request, username=username, password=password1)
                     if user is not None:
