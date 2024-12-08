@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row center">
         <div class="col-md-6 offset-md-3">
-            <h2>Edit Poll</h2>
+            <h1 style="font-weight: bold;">Edit Poll</h1>
             {% if messages %}
             {% if messages %}
             <div class="messages">
@@ -36,7 +36,7 @@
             </form>
 
             <div class="choices">
-                <h2 class="text-center mt-3">Choices</h2>
+                <h2 class="text-center mt-3" style="font-weight: bold;">Choices</h2>
                 <hr>
                 <ul class="list-group">
                     {% for choice in poll.choice_set.all %}
