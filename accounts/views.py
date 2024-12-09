@@ -18,6 +18,7 @@ def logout_user(request):
 
 
 def index(request):
+    form = None
     if request.method == 'POST':
         print("POST request received:", request.POST)  # 打印 POST 数据
         # 处理登录
@@ -89,8 +90,12 @@ def index(request):
                         messages.error(request, 'Authentication failed. Please try again.',extra_tags='alert alert-warning alert-dismissible fade show')
             else:
                 print("Form is not valid.")
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        messages.error(request, f"Error in {field}: {error}")
     else:
         form = UserRegistrationForm()
+
     return render(request, 'accounts/index.html', {'form': form})
 
 
