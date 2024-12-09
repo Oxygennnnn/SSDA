@@ -3,7 +3,7 @@ const sign_up_btn = document.querySelector("#sign-up-btn");
 const container = document.querySelector(".container");
 const passwordInput = document.querySelector('input[name="password1"]');
 const confirmPasswordInput = document.querySelector('input[name="password2"]');
-const form = document.querySelector('form.sign-in-form'); // 确保选择的是注册表单
+const form = document.querySelector('form.sign-in-form');
 
 sign_up_btn.addEventListener("click", () => {
     container.classList.add("sign-up-mode");
@@ -31,6 +31,8 @@ function displayErrorInInput(inputElement, errorText) {
     errorSpan.style.fontWeight = "bold";
     errorSpan.style.fontSize = "0.8em";
     errorSpan.style.position = "absolute";
+    errorSpan.style.right = "110px";
+    errorSpan.style.top = "20px";
 
     const inputParent = inputElement.parentNode;
     inputParent.style.position = "relative";
