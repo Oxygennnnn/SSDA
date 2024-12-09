@@ -19,26 +19,25 @@
           <!-- 用户名字段 -->
           <div class="form-group input_field">
             <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}"
-              value="{{ form.username.value }}" class="form-control" placeholder="Username">
+                   value="{{ form.username.value }}" class="form-control" placeholder="Username" required
+                   pattern="[a-zA-Z0-9]{3,10}" title="Username should be 3-10 characters long and contain only letters and numbers">
           </div>
 
           <!-- 邮箱字段 -->
           <div class="form-group input_field">
             <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}"
-              value="{{ form.email.value }}" class="form-control" placeholder="Email">
-          </div>
+                   value="{{ form.email.value }}" class="form-control" placeholder="Email" required></div>
 
           <!-- 密码字段 -->
           <div class="form-group input_field">
             <input type="password" name="{{ form.password1.name }}" id="{{ form.password1.id_for_label }}"
-              value="{{ form.password1.value }}" class="form-control" placeholder="Password">
-          </div>
+                   value="{{ form.password1.value }}" class="form-control" placeholder="Password" required
+                   pattern=".{6,15}" title="Password should be 6-15 characters long"></div>
 
           <!-- 确认密码字段 -->
           <div class="form-group input_field">
             <input type="password" name="{{ form.password2.name }}" id="{{ form.password2.id_for_label }}"
-              value="{{ form.password2.value }}" class="form-control" placeholder="Confirm Password">
-          </div>
+                   value="{{ form.password2.value }}" class="form-control" placeholder="Confirm Password" required></div>
 
 
           <button type="submit" class="btn btn-primary">Sign Up</button>
@@ -78,6 +77,7 @@
           </p>
           <h3 style="margin-bottom: 5px;">Register</h3>
           <button class="btn transparent" id="sign-in-btn">Go</button>
+
         </div>
       </div>
     </div>
