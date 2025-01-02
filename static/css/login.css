@@ -476,3 +476,11 @@ form.sign-in-form {
         left: 50%;
     }
 }
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+  }

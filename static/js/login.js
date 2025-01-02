@@ -42,3 +42,10 @@ function displayErrorInInput(inputElement, errorText) {
         errorSpan.remove();
     }, 1000);
 }
+
+setTimeout(function() {
+    const messages = document.querySelectorAll('.alert');
+    messages.forEach(function(msg) {
+      msg.style.display = 'none';  // 或者通过移除元素来消除它
+    });
+  }, 5000);  // 消息将在 5 秒后消失

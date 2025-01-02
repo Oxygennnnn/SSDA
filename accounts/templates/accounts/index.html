@@ -12,6 +12,16 @@
     <div class="forms-container">
       <div class="signin-signup">
 
+        {% if messages %}
+        <div class="alert alert-danger">
+          <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
         <form action="" method="POST" class="sign-in-form">
           <h2 class="title">Register</h2>
           {% csrf_token %}
@@ -84,6 +94,7 @@
   </div>
 
   <script src="/static/js/login.js"></script>
+  
 </body>
 
 </html>
